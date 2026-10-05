@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt Copy Tool</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @keyframes smoothSpin {
+            0% { transform: scale(1) rotate(0deg); }
+            50% { transform: scale(1.15) rotate(180deg); }
+            100% { transform: scale(1) rotate(360deg); }
+        }
+        .animate-smooth-logo {
+            animation: smoothSpin 8s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans selection:bg-brand-500 selection:text-white">
+
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-slate-900/80 backdrop-blur-md border-b border-slate-800 px-6 py-4 flex items-center justify-between shadow-lg">
+        <div class="flex items-center space-x-3">
+            <!-- Cool Logo with smooth scaling and rotating -->
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-500 to-emerald-400 flex items-center justify-center shadow-lg shadow-brand-500/30 animate-smooth-logo">
+                <i class="fa-solid fa-cube text-slate-950 text-lg"></i>
+            </div>
+            <span class="font-bold text-lg tracking-wide bg-gradient-to-r from-white to-slate-400 bg-clip-text text-transparent">CubePrompt Pro</span>
+        </div>
+        <div class="flex items-center space-x-4">
+            <span class="text-xs px-3 py-1 rounded-full bg-brand-500/10 text-brand-400 border border-brand-500/20 font-medium">Ready to Copy</span>
+        </div>
+    </nav>
+
+    <main class="flex-1 flex flex-col items-center justify-center p-6 pt-28 pb-16 max-w-4xl mx-auto w-full">
+        
+        <div class="text-center mb-8 space-y-2">
+            <h1 class="text-3xl font-extrabold tracking-tight sm:text-4xl">Full Alg & PDF Prompt Generator</h1>
+            <p class="text-slate-400 max-w-xl mx-auto text-sm sm:text-base">Click below to copy the complete specification prompt instantly into your clipboard.</p>
+        </div>
+
+        <div class="w-full bg-slate-900 border border-slate-800 rounded-2xl p-6 shadow-2xl relative group">
+            <div class="absolute top-4 right-4">
+                <button id="copyBtn" onclick="copyPromptText()" class="flex items-center space-x-2 bg-brand-600 hover:bg-brand-500 text-white font-semibold px-4 py-2 rounded-xl transition-all duration-200 shadow-lg shadow-brand-600/20 active:scale-95">
+                    <i id="copyIcon" class="fa-regular fa-copy"></i>
+                    <span id="copyText">Copy Prompt</span>
+                </button>
+            </div>
+            
+            <h3 class="text-xs uppercase tracking-wider font-semibold text-slate-400 mb-3">Prompt Content Preview</h3>
+            
+            <div id="promptContent" class="bg-slate-950/70 border border-slate-800/80 rounded-xl p-4 text-slate-300 font-mono text-xs sm:text-sm h-64 overflow-y-auto whitespace-pre-wrap leading-relaxed select-all">All algs for all types of methods titles and subtitles for all of everything all notes tips every detail and first two layers angles and algs like br then the algs then like fr then the algs like in the pdf and also all the keyhole solutions and every detail of all pdfs must be in somewhere just tweak it no more than five percent and I have permission from creators so it is fine and also the solver Easy to colour and move to different angle solver and no placeholders and everything Same layout as pdf and also add the pdf examples just make it nearly the same and make the nav button actually in a nav to stay there always and make the logo cooler and when loading the logo big and small and turn smoothly</div>
+        </div>
+    </main>
+
+    <footer class="py-4 text-center text-xs text-slate-600 border-t border-slate-900">
+        CubePrompt Pro &bull; Fully self-contained & responsive tool
+    </footer>
+
+    <script>
+        function copyPromptText() {
+            const textToCopy = document.getElementById('promptContent').innerText;
+            const copyBtn = document.getElementById('copyBtn');
+            const copyIcon = document.getElementById('copyIcon');
+            const copyText = document.getElementById('copyText');
+
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                copyBtn.classList.remove('bg-brand-600', 'hover:bg-brand-500');
+                copyBtn.classList.add('bg-emerald-700');
+                copyIcon.className = 'fa-solid fa-check';
+                copyText.innerText = 'Copied!';
+
+                setTimeout(() => {
+                    copyBtn.classList.remove('bg-emerald-700');
+                    copyBtn.classList.add('bg-brand-600', 'hover:bg-brand-500');
+                    copyIcon.className = 'fa-regular fa-copy';
+                    copyText.innerText = 'Copy Prompt';
+                }, 2500);
+            }).catch(err => {
+                console.error('Failed to copy text: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
